@@ -38,5 +38,31 @@ const employeeInfo = () => {
                 'Exit'
             ]
         }
-    ])
+    ]).then((response) => {
+        switch (response.init) {
+            case 'View Employees':
+                viewEmployees ();
+                break;
+        }
+    })
 }
+
+//I'm going to write each function now and test as I go.
+const viewEmployees = () => {
+    db.query(`SELECT employee.id, employee.first_name, employee.last_name, 
+    role.title AS role, role.salary, 
+    department.name AS department, employee.manager_id
+    FROM employee
+    LEFT JOIN employee AS manager
+    ON employee.manager_id = manager.id
+    JOIN role
+    ON role.id = employee.role_id
+    JOIN department
+    ON role.department_id = department.id
+    ORDER BY employee.id `, (err, results) =>{
+        if(err) return console.log(err);
+        console.table(results);
+        employeeInfo();
+    });
+}
+//I had to comment out the function to make sure nothing broke.  I still haven't connected my db stuff so I'll probabbly go work on that.
