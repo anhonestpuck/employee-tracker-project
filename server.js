@@ -171,6 +171,20 @@ const addEmployee = () => {
         })
     })
 }
+const addDepartment = () => {
+    inquirer.prompt([
+        {
+            name: `deptName`,
+            type: `input`,
+            message: `What department are you in?`
+        }
+    ]).then((response) => {
+        db.query(`INSERT INTO department (name) VALUES(?)`, response.deptName, (err) => {
+            if (err) return console.log(err);
+            employeeInfo();
+        })
+    })
+}
 
 const addJobRole = () => {
     db.query(`SELECT * FROM department`, (err, departments) => {
