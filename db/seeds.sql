@@ -12,3 +12,4 @@ VALUES (`Chief Creative Officer`, 2000000, 2),
        (`Casting agent`, 1000000, 4),
        (`Executive Producer`, 65000000, 3),
        (`Lead Role`, 2000000, 1),
+       /* I definitely wanted to get some data in there real quick */
