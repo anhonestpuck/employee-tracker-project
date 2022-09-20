@@ -54,6 +54,9 @@ const employeeInfo = () => {
             case `Add Employee`:
                 addEmployee();
                 break;
+                case `Add Department`:
+                addDepartment();
+                break;
         }
     })
 }
@@ -155,4 +158,41 @@ const addEmployee = () => {
             })
         })
     })
+}
+
+const addRole = () => {
+    db.query(`SELECT * FROM department`, (err, departments) => {
+        if (err) return console.log(err);
+
+        inquirer.prompt([
+            {
+                name: `jobRole`,
+                type: `input`,
+                message: `What is the new job title?`
+            },
+            {
+                name: `jobPay`,
+                type: `input`,
+                message: `What is the pay?`
+            },
+            {
+                name: `departmentName`,
+                type: `input`,
+                message: `Which department should this belong under?`,
+                choices: departments.map(department =>
+                    ({
+                        name: department.name,
+                        value: deapartment.id
+                    })
+                    )
+            }
+        ]).then((response) => {
+            console.log(response.departmentName);
+            db.query(`INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)`, [response.jobRole, response.jobPay, response.departmentName],
+            (err) => {
+                if (err) return console.log(err);
+                employeeInfo();
+            })
+        })
+    });
 }
