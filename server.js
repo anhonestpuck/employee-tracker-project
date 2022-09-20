@@ -222,3 +222,32 @@ const addJobRole = () => {
         })
     });
 }
+
+const updateJobRole = () => {
+    db.query(`SELECT * FROM employee`, (err, employees) => {
+        if (err) return console.log(err);
+        inquirer.prompt([
+            {
+                name: `employeeUpdate`,
+                type: `list`,
+                message: `Which Employee would you care to update?`,
+                choices: employees.map(employee =>
+                    ({
+                        name: employee.first_name + ` ` + employee.last_name,
+                        value: employee.id
+                    })
+                    )
+            },
+            {
+                name: `jobRoleUpdate`,
+                message: `What role ID will this be updated to?`
+            }
+        ]).then((response) => {
+            db.query(`UPDATE employee SET role_id = ?`, [response.jobRoleUpdate, response.employeeUpdate],
+                (err) => {
+                    if (err) return console.log(err);
+                    employeeInfo();
+                })
+        })
+    });
+}
