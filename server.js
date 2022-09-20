@@ -33,7 +33,7 @@ function employeeInfo () {
                 'View Employees',
                 'View Departments',
                 'View Roles',
-                'Add Emmployee',
+                'Add Employee',
                 'Add Department',
                 'Add Role',
                 'Update Employee Role',
@@ -53,15 +53,16 @@ function employeeInfo () {
                 break;
 
                 //now i'm going to add in the other prompts to collect data so i can start entering it
-            case `Add Employee`:
-                addEmployee();
-                break;
+          
                 case `Add Department`:
                 addDepartment();
                 break;
                 // I'm going to finish putting all the prompts together at this point because I've been testing with hard data and I want to make sure it's working
             case 'Add Role':
                 addJobRole();
+                break;
+            case `Add Employee`:
+                addEmployee();
                 break;
             case 'Update Employee Role':
                 updateJobRole();
