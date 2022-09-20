@@ -43,6 +43,9 @@ const employeeInfo = () => {
             case 'View Employees':
                 viewEmployees ();
                 break;
+            case 'View Departments':
+                viewDepartments();
+                break;
         }
     })
 }
@@ -66,3 +69,11 @@ const viewEmployees = () => {
     });
 }
 //I had to comment out the function to make sure nothing broke.  I still haven't connected my db stuff so I'll probabbly go work on that.
+
+const viewDepartments = () => {
+    db.query(`SELECT * FROM department`,(err, results) => {
+        if (err) return console.log(err);
+        console.table(results);
+        employeeInfo();
+    });
+}
