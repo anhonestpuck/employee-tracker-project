@@ -1,5 +1,9 @@
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES 
+VALUES (`Ari`, `Gold`, 3, NULL),
+       (`Joss`, `Whedon`, 2, 4),
+       (`Zack`, `Snyder`, 3, 2),
+       (`Christopher`, `Nolan`, 4, 1);
+       
 INSERT INTO department (name)
 VALUES (`Acting`),
        (`Technical`),

@@ -57,7 +57,19 @@ const employeeInfo = () => {
                 case `Add Department`:
                 addDepartment();
                 break;
+                // I'm going to finish putting all the prompts together at this point because I've been testing with hard data and I want to make sure it's working
+            case 'Add Role':
+                addJobRole();
+                break;
+            case 'Update Employee Role':
+                updateJobRole();
+                break;
+            case 'Exit':
+                process.exit(0);
         }
+    }).catch((err) => {
+        console.log(err);
+        employeeInfo();
     })
 }
 
@@ -160,7 +172,7 @@ const addEmployee = () => {
     })
 }
 
-const addRole = () => {
+const addJobRole = () => {
     db.query(`SELECT * FROM department`, (err, departments) => {
         if (err) return console.log(err);
 
