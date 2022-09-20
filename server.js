@@ -18,9 +18,64 @@ console.log(
     |  |__   |  \  /  | |  |_)  | |  |     |  |  |  |  \   \/   /  |  |__   |  |__      ---|  |----|  |_)  |      /  ^  \   |  ,----'|  '  /  |  |__   |  |_)  |    
     |   __|  |  |\/|  | |   ___/  |  |     |  |  |  |   \_    _/   |   __|  |   __|         |  |     |      /      /  /_\  \  |  |     |    <   |   __|  |      /     
     |  |____ |  |  |  | |  |      |  ----.|  --  |     |  |     |  |____ |  |____        |  |     |  |\  \----./  _____  \ |  ----.|  .  \  |  |____ |  |\  \----.
-    |_______||__|  |__| | _|      |_______| \______/      |__|     |_______||_______|       |__|     | _| ._____/__/     \__\ \______||__|\__\ |_______|| _| ._____|`
+    |_______||__|  |__| | _|      |_______| \______/      |__|     |_______||_______|       |__|     | _| ._____/__/     \__\ \______||__|\__\ |_______|| _| ._____|` + '\n'
 );
 //found a really cool star wars one for the log
+
+employeeInfo();
+
+function employeeInfo () {
+    inquirer.prompt([
+        {
+            name: 'init',
+            type: 'list',
+            choices: [
+                'View Employees',
+                'View Departments',
+                'View Roles',
+                'Add Emmployee',
+                'Add Department',
+                'Add Role',
+                'Update Employee Role',
+                'Exit'
+            ]
+        }
+    ]).then((response) => {
+        switch (response.init) {
+            case 'View Employees':
+                viewEmployees ();
+                break;
+            case 'View Departments':
+                viewDepartments();
+                break;
+            case 'View Roles':
+                viewRole();
+                break;
+
+                //now i'm going to add in the other prompts to collect data so i can start entering it
+            case `Add Employee`:
+                addEmployee();
+                break;
+                case `Add Department`:
+                addDepartment();
+                break;
+                // I'm going to finish putting all the prompts together at this point because I've been testing with hard data and I want to make sure it's working
+            case 'Add Role':
+                addJobRole();
+                break;
+            case 'Update Employee Role':
+                updateJobRole();
+                break;
+            case 'Exit':
+                process.exit(0);
+        }
+    }).catch((err) => {
+        console.log(err);
+        employeeInfo();
+    })
+}
+
+//I'm going to write each function now and test as I go.
 const viewEmployees = () => {
     db.query(`SELECT employee.id, employee.first_name, employee.last_name, 
     role.title AS role, role.salary, 
@@ -198,60 +253,3 @@ const updateJobRole = () => {
         })
     });
 }
-
-
-
- const employeeInfo = () => {
-    inquirer.prompt([
-        {
-            name: 'init',
-            type: 'list',
-            choices: [
-                'View Employees',
-                'View Departments',
-                'View Roles',
-                'Add Emmployee',
-                'Add Department',
-                'Add Role',
-                'Update Employee Role',
-                'Exit'
-            ]
-        }
-    ]).then((response) => {
-        switch (response.init) {
-            case 'View Employees':
-                viewEmployees ();
-                break;
-            case 'View Departments':
-                viewDepartments();
-                break;
-            case 'View Roles':
-                viewRole();
-                break;
-
-                //now i'm going to add in the other prompts to collect data so i can start entering it
-            case `Add Employee`:
-                addEmployee();
-                break;
-                case `Add Department`:
-                addDepartment();
-                break;
-                // I'm going to finish putting all the prompts together at this point because I've been testing with hard data and I want to make sure it's working
-            case 'Add Role':
-                addJobRole();
-                break;
-            case 'Update Employee Role':
-                updateJobRole();
-                break;
-            case 'Exit':
-                process.exit(0);
-        }
-    }).catch((err) => {
-        console.log(err);
-        employeeInfo();
-    })
-}
-
-//I'm going to write each function now and test as I go.
-
-employeeInfo();
