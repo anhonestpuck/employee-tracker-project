@@ -46,6 +46,14 @@ const employeeInfo = () => {
             case 'View Departments':
                 viewDepartments();
                 break;
+            case 'View Roles':
+                viewRole();
+                break;
+
+                //now i'm going to add in the other prompts to collect data so i can start entering it
+            case `Add Employee`:
+                addEmployee();
+                break;
         }
     })
 }
@@ -76,4 +84,75 @@ const viewDepartments = () => {
         console.table(results);
         employeeInfo();
     });
+}
+
+const viewRole = () => {
+    db.query(`SELECT * FROM role`, (err, results) => {
+        if (err) return console.log(err);
+        console.table(results);
+        employeeInfo();
+    })
+}
+
+const addEmployee = () => {
+    db.query(`SELECT * FROM role`, (err, roles) => {
+        if (err) return console.log(err);
+        inquirer.prompt([
+            {
+                name: `firstName`,
+                type: `input`,
+                message: `Enter first name`
+            },
+            {
+                name: `lastName`,
+                type: `input`,
+                message: `Enter last name`
+            },
+            {
+                name: `jobRole`,
+                type: `list`,
+                message: `What position does the employee hold`,
+                choices: roles.map(role =>
+                    ({
+                        name: role.title,
+                        value: role.id
+                    })
+                    )
+            },
+            {
+                name: `manager`,
+                type: `list`,
+                message: `Who manages this employee?`,
+                choices: [
+                    {
+                        name: `Ari Gold`,
+                        value: 1
+                    },
+                    {
+                        name: `Joss Whedon`,
+                        value: 2
+                    },
+                    {
+                        name: `Zack Snyder`,
+                        value: 3
+                    },
+                    {
+                        name: `Christopher Nolan`,
+                        value: 4
+                    },
+                    {
+                        name: `No manager`,
+                        value: null
+                    }
+                ]
+            }
+        ]).then((response) => {
+            db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)`,
+            [response.firstName, response.lastName, response.jobRole, response.manager],
+            (err) => {
+                if (err) return console.log (err);
+                employeeInfo();
+            })
+        })
+    })
 }
