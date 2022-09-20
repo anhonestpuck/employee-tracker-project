@@ -210,7 +210,7 @@ const addJobRole = () => {
                 choices: departments.map(department =>
                     ({
                         name: department.name,
-                        value: deapartment.id
+                        value: department.id
                     })
                     )
             }
