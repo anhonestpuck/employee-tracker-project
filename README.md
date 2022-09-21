@@ -36,4 +36,4 @@ MIT [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https
 JavaScript, node.js, and sequelize, as well as an ascii generator 
 
 ## Questions
-Please contact me at lauraRweiner@gmail.com if you have any questions or suggestions.
+Please contact me at pjeffrey40@gmail.com if you have any questions or suggestions.
