@@ -182,7 +182,7 @@ const addDepartment = () => {
             message: `What department are you in?`
         }
     ]).then((response) => {
-        db.query(`INSERT INTO department (name) VALUES(?)`, response.deptName, (err) => {
+        db.query(`INSERT INTO department(name) VALUES (?)`, response.deptName, (err) => {
             if (err) return console.log(err);
             employeeInfo();
         })
@@ -217,7 +217,7 @@ const addJobRole = () => {
             }
         ]).then((response) => {
             console.log(response.departmentName);
-            db.query(`INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)`, [response.jobRole, response.jobPay, response.departmentName],
+            db.query(`INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)`, [response.jobRole, response.jobPay, response.departmentName,],
             (err) => {
                 if (err) return console.log(err);
                 employeeInfo();
