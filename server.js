@@ -225,7 +225,7 @@ const addJobRole = () => {
         })
     });
 }
-
+//I went back and forth about where to put things but I decided that I didn't need to have it perfect and that the user should know that a numeric value should be put under the department when adding a role. I got so caught up in syntax errors that I had no idea what was going on
 const updateJobRole = () => {
     db.query(`SELECT * FROM employee`, (err, employees) => {
         if (err) return console.log(err);
